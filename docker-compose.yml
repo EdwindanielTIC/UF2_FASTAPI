@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+# cuando vaya a rever Register, server, debo de poner lo siguiente
+  db: #nombre del servicio es el que debo de poner en vez de localhost
+    image: postgres:13
+    container_name: juego_penjat_db
+    environment:
+      - POSTGRES_DB=postgres_24255
+      - POSTGRES_PASSWORD=pass_postgres1 # esta sera la contraseña que se usara para conectarse a la base de datos
+      - POSTGRES_USER=user_postgres1 # esta sera el usuario que se usara para conectarse a la base de datos cuaando lo habra desde pgadmin
+    ports:
+      - "5433:5432" #he cambiado el puerto de 5432 a 5433 poeque me daba problemas con el puerto 5432
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_2425
+    ports:
+      - "80:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 2024_edwin.ramirez@iticbcn.cat
+      PGADMIN_DEFAULT_PASSWORD: 2024_edwin.ramirez
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+volumes:
+  local_pgdata:
+  pgadmin-data:
+
+  ## Para hacer el build de la imagen de la aplicacion se debe de ejecutar el siguiente comando en la terminal de la carpeta donde se encuentra el archivo docker-compose.yml
+  ## docker-compose up --d , para que me funcione esto, debo de enceder la aplicacion de docker que tengo.
+  # despues voy a intenter para poner localhost, si no me funciona con localhost, pongo localhost:8080
+
