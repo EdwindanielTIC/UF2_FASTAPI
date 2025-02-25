@@ -23,7 +23,7 @@ def create_table(conn):
         fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         idioma VARCHAR(50) DEFAULT 'Español',
         categoria_id INT,
-        FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+        FOREIGN KEY (categoria_id) REFERENCES categorias(id_categorias)
     )
     '''
     

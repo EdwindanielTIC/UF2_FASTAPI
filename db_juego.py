@@ -4,20 +4,20 @@ import alumne_Schema
 
 def leer_jugador(id_jugador : int):
     try:
-                conn = cn.connection_db()
-                cur = conn.cursor()
-                query = "SELECT id_jugador,nombre,apellido FROM jugador WHERE id_jugador = %s"
-                cur.execute(query, (id_jugador,))
-                jugador = cur.fetchone()
-                
-                if not jugador:
-                    return "No se ha encontrado el jugador"
-                              
-                return alumne_Schema.jugador_schema(jugador)
+        conn = cn.connection_db()
+        cur = conn.cursor()
+        query = "SELECT id_jugador,nombre,apellido FROM jugador WHERE id_jugador = %s"
+        cur.execute(query, (id_jugador,))
+        jugador = cur.fetchone()
+        
+        if not jugador:
+            return None
+                        
+        return alumne_Schema.jugador_schema(jugador)
                 
     except Exception as e:
         raise Exception(f"NO se ha podido realizar la consulta")
-    
+
 
 def insertarJugador(nombre: str, apellido: str):
     try:
