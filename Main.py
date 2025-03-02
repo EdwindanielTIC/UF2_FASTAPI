@@ -7,17 +7,19 @@ from create import create_table
 import Insert as ins
 import read as rd
 import Schema_judadores as SHJ
+import update as up
+import delete as dl
 
 
 app = FastAPI()
 
     
 def get_db():
-    db = cn()
+    db = cn() # cn() es la función que me devuelve la conexión a la base de datos
     try:
-        yield db
+        yield db # me devuelve  la conexión para ser usada en la consultas de los enpints
     finally:
-        db.close()
+        db.close() # Cierra la conexión automáticamente después de la ejecución
         
 ##Creamon los BASEMODEL
 class Jugador(BaseModel):
@@ -70,7 +72,9 @@ def registrar_Intentos(jugador_id: int, palabra_id: int, puntos: int, tiempo_jug
 
 
 @app.get("/get_info_jugador/{jugadro_id}")
-def puntosdel_jugador(jugadro_id: int, db = Depends(get_db)):
+def puntosdel_jugador(jugadro_id: int, db = Depends(get_db)): ## funcion aprendida , esto hace que mi conexion a mi bbd sea mas rapdio, 
+    ## en fatapy me permite la inyeccion de dependecnias, get_db() establece la coneccion a mi bbd que es la que tengo arriba creada, la def get_db()
+    ## esto me ayuna a no escribir en cada codigo el db=cn() cursor = db.cursor()
     stats = rd.obtener_jugadorID(db, jugadro_id)
     return {
         "jugador": f"Jugador {jugadro_id}",
@@ -123,3 +127,59 @@ def get_categories(db = Depends(get_db)):
         return rd.get_categories(db)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+    
+    ## creado delete y update
+    
+    
+@app.put("/actualizar_jugador/{jugador_id}")
+def actualizar_jugador(jugador_id: int, jugador: Jugador, db=Depends(get_db)):
+    result = up.actualizar_jugador(db, jugador_id, jugador.nombre, jugador.apellido)
+    if result:
+        return result
+    raise HTTPException(status_code=404, detail="Jugador no encontrado")
+
+
+# Endpoint para actualizar la categoria
+@app.put("/actualizar_categoria/{categoria_id}")
+def actualizar_categoria(categoria_id: int, categoria: Categoria, db=Depends(get_db)):
+    result = up.actualizar_categoria(db, categoria_id, categoria.nombre)
+    if result:
+        return result
+    raise HTTPException(status_code=404, detail="Categoría no encontrada")
+
+
+#  actualizar  palabra
+@app.put("/actualizar_palabra/{palabra_id}")
+def actualizar_palabra(palabra_id: int, palabra: Palabra, db=Depends(get_db)):
+    result = up.actualizar_palabra(db, palabra_id, palabra.palabra, palabra.categoria_id, palabra.idioma)
+    if result:
+        return result
+    raise HTTPException(status_code=404, detail="Palabra no encontrada")
+
+
+# Endpoint para eliminar un jugador
+@app.delete("/eliminar_jugador/{jugador_id}")
+def eliminar_jugador(jugador_id: int, db=Depends(get_db)):
+    result = dl.eliminar_jugador(db, jugador_id)
+    if result:
+        return result
+    raise HTTPException(status_code=404, detail="Jugador no encontrado")
+
+
+# Endpoint para eliminar una categoría
+@app.delete("/eliminar_categoria/{categoria_id}")
+def eliminar_categoria(categoria_id: int, db=Depends(get_db)):
+    result = dl.eliminar_categoria(db, categoria_id)
+    if result:
+        return result
+    raise HTTPException(status_code=404, detail="Categoría no encontrada")
+
+
+# Endpoint para eliminar una palabra
+@app.delete("/eliminar_palabra/{palabra_id}")
+def eliminar_palabra(palabra_id: int, db=Depends(get_db)):
+    result = dl.eliminar_palabra(db, palabra_id)
+    if result:
+        return result
+    raise HTTPException(status_code=404, detail="Palabra no encontrada")
