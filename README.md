@@ -82,3 +82,44 @@ Se me agrega a la bbdd correctamente :
 Por ultimo, si queremos ver todas las categorias creo un get: 
 
 ![image](https://github.com/user-attachments/assets/15b1fdfb-10d5-41f9-af8d-4839585883f2)
+
+
+## En la practica Anterior habia creado el insert y read, asi que ahora solo tendre que añadir del crud el update y delete: 
+
+UPDATE: 
+
+Voy a querer cambiar el jugador con id 11, que es enric, en mi bbdd aparece lo siguiente : 
+![image](https://github.com/user-attachments/assets/c693482f-db94-48a5-947b-caa82ef620ac)
+
+Actualizandolo : 
+![image](https://github.com/user-attachments/assets/6047b1c6-8576-469e-b607-9e884d42d37d)
+![image](https://github.com/user-attachments/assets/b00663fc-b723-4b26-a358-a07d9fb36774)
+Comprobadno en mi bbd: 
+![image](https://github.com/user-attachments/assets/fd426ca1-f23b-4097-aabb-fdca083f9f23)
+
+Categoria :  sofa con id 43 la voy a cambiar a inmobiliario : 
+![image](https://github.com/user-attachments/assets/37cb23cc-debd-45bd-bb3e-521f3eb1fd51)
+![image](https://github.com/user-attachments/assets/afb97929-c14d-451e-abdd-33cbc0e3482c)
+![image](https://github.com/user-attachments/assets/b5166765-6ef3-49a3-a8cf-20f104852e14)
+en mi bbdd : 
+![image](https://github.com/user-attachments/assets/fa222b25-01bb-4a8d-9e92-ff126175ca92)
+
+
+Palabra turron con id 5 : 
+![image](https://github.com/user-attachments/assets/54bb4865-3a84-4daa-893b-2a23cb9953ae)
+![image](https://github.com/user-attachments/assets/3fe1c3a6-4f61-4a7b-a832-a04828e9bd8f)
+![image](https://github.com/user-attachments/assets/a18f9d05-b9f2-4411-8f97-6558484cba69)
+
+EN MI BBDD: 
+![image](https://github.com/user-attachments/assets/5897436d-ab84-46cf-9ba6-448b3c135404)
+
+Pasamos a los DELETE: 
+
+
+
+
+
+
+
+
+
