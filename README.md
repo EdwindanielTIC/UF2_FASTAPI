@@ -43,7 +43,24 @@ y al hacer esto me devolvera el siguinete registro que es lo que me aparecera en
 lo que se guarda en la bbdd: 
 ![image](https://github.com/user-attachments/assets/3e35556c-0442-4ef3-997d-ba790999cb53)
 
+luego tmb he creado un get donde muestro la infromacion del jugador : 
+    ![image](https://github.com/user-attachments/assets/08b22e77-8124-41d1-b197-bc81d662a4a8)
 
-    
+   
+y me muestra la siguiente informacion del jugador:
+![image](https://github.com/user-attachments/assets/454e1a87-4453-457e-9053-f97abf5ef4d0)
+
+
+tambien he creado un post de insertar jugador : 
+
+
+![image](https://github.com/user-attachments/assets/5e5fa9d3-8d85-48b9-8f13-79566eae1cc9)
+
+y me se agrega ortogandole un id automatico: 
+
+![image](https://github.com/user-attachments/assets/24563a7e-e6eb-4cb7-bb8a-6574207476ac)
+
+
+
 
  
