@@ -1,68 +1,93 @@
 import psycopg2
-import conn as cn
-from fastapi import HTTPException
-import alumne_Schema
+from conn import connection_db  # Asegúrate de tener esta función en tu archivo de conexión
+from Schema_judadores import jugador_schema,categorias_schema
 
-def leer_palabras():
-    try:
-        conn = cn.connection_db()
-        cur = conn.cursor()
-        query = "SELECT id_palabras, palabra, categoria, fecha_creacion, idioma, categoria_id FROM palabras"
-        cur.execute(query)
-        palabras = cur.fetchall()
-       
-        if not palabras:
-            return []
-        devolver_palabra = [
-            {
-                "id_palabras": row[0],
-                "palabra": row[1],
-                "categoria": row[2],
-                "fecha_creacion": row[3],
-                "idioma": row[4],
-                "categoria_id": row[5] if row[5] is not None else None
-            }
-            for row in palabras
-        ]
-       
-        return devolver_palabra
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-    finally:
-        if conn:
-            cur.close()
-            conn.close()
-            
 
-def leer_registros_juego():
-    try:
-        conn = cn.connection_db()
-        cur = conn.cursor()
-        query = "SELECT id_registro, id_jugador, id_palabra, puntuacio, temps_joc, data_hora, estat_partida FROM registro_juego"
-        cur.execute(query)
-        registros = cur.fetchall()
-        
-        if not registros:
-            return []
-        
-        devolver_registro = [
-            {
-                "id_registro": row[0],
-                "id_jugador": row[1],
-                "id_palabra": row[2],
-                "puntuacio": row[3],
-                "temps_joc": row[4] if row[4] is not None else None,
-                "data_hora": row[5].isoformat(),
-                "estat_partida": row[6]
-            }
-            for row in registros
-        ]
-        return devolver_registro
+def leer_Jugadores(jugador_id):
+    conn = connection_db() ## es muy importante que ponga () porque si no, el execute no me funcionara
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT * FROM jugador WHERE id_jugador = %s", (jugador_id,) # es muy importante que ponga la coma si no me darra un error de does not support indexing
+    )
+    leyendo_jugador = cursor.fetchone()
+    conn.commit()
+    conn.close()
     
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    return jugador_schema(leyendo_jugador)
+
+
+
+
+def leer_categorias(categoria_id):
+    conn = connection_db()  # La conexión debe crearse correctamente
+    cursor = conn.cursor()
+    try:
+        cursor.execute(
+            "SELECT * FROM categorias WHERE id_categorias = %s", (categoria_id,)  # La coma es importante
+        )
+        leyendo_categoria = cursor.fetchone()
+
+        if not leyendo_categoria:
+            return None  # Retorna None si no existe la categoría
+        
+        return categorias_schema(leyendo_categoria)  # Convierte la categoría a JSON
+        
+    except psycopg2.Error as e:
+        return {"error": str(e)}
     
     finally:
-        if conn:
-            cur.close()
-            conn.close()
+        cursor.close()
+        conn.close()
+    
+
+
+def get_categories(db):
+    query = "SELECT id_categorias, nombre FROM categorias"
+    cursor = db.cursor()
+    cursor.execute(query)
+    return [{"id_categorias": row[0], "nombre": row[1]} for row in cursor.fetchall()]
+
+## A continuacion creamos la puntuacion de la partidas: 
+def obtener_jugadorID(db, jugadro_id: int):
+    query = """
+        SELECT 
+            SUM(puntuacio) as puntos_partidas_actuales,
+            COUNT(*) as total_partidas,
+            SUM(CASE WHEN estat_partida = 'ganada' THEN 1 ELSE 0 END) as partidas_ganadas,
+            MAX(puntuacio) as max_puntos,
+            data_hora as fecha_max_puntos
+        FROM registro_juego 
+        WHERE id_jugador = %s
+        GROUP BY id_jugador, data_hora
+        ORDER BY max_puntos DESC
+        LIMIT 1;
+    """
+    cursor = db.cursor()
+    cursor.execute(query, (jugadro_id,))
+    result = cursor.fetchone()
+
+    if result:
+        return {
+            "puntos_partidas_actuales": result[0] or 0,
+            "total_partidas": result[1] or 0,
+            "partidas_ganadas": result[2] or 0,
+            "partida_amb_mes_punts": {
+                "puntos": result[3] or 0,
+                "fecha": result[4].strftime("%d/%m/%Y %H:%M") if result[4] else None
+            }
+        }
+    return {
+        "puntos_partidas_actuales": 0,
+        "total_partidas": 0,
+        "partidas_ganadas": 0,
+        "partida_amb_mes_punts": {"puntos": 0, "fecha": None}
+    }
+    
+    
+    
+
+def get_categories(db):
+    query = "SELECT id_categorias, nombre FROM categorias"
+    cursor = db.cursor()
+    cursor.execute(query)
+    return [{"id_categorias": row[0], "nombre": row[1]} for row in cursor.fetchall()]

@@ -11,6 +11,6 @@ def connection_db():
         
     )
 
-    print("Estas conectado a la base de datos !!")
+    print("Estas conectado a la base de datos")
     return conn
 

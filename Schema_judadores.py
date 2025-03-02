@@ -40,4 +40,9 @@ def registro_juego_Schema(registro):
     
     
 
+    
+    
+    
+    
+
 

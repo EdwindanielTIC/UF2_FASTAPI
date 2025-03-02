@@ -1,31 +1,53 @@
+import psycopg2
+from conn import connection_db  # Asegúrate de tener esta función en tu archivo de conexión
+import Schema_judadores as sch
 
-# import psycopg2
-# import conn as cn
-# from fastapi import HTTPException
 
-# def crear_registro_juego(registro):
-#     try:
-#         conn = cn.connection_db()
-#         cur = conn.cursor()
-#         query = """
-#             INSERT INTO registro_juego (id_jugador, id_palabra, puntuacio, temps_joc, estat_partida)
-#             VALUES (%s, %s, %s, %s, %s) RETURNING id_registro, id_jugador, id_palabra, puntuacio, temps_joc, data_hora, estat_partida
-#         """
-#         cur.execute(query, (registro.id_jugador, registro.id_palabra, registro.puntuacio, registro.temps_joc, registro.estat_partida))
-#         nuevo_registro = cur.fetchone()
-#         conn.commit()
-#         return {
-#             "id_registro": nuevo_registro[0],
-#             "id_jugador": nuevo_registro[1],
-#             "id_palabra": nuevo_registro[2],
-#             "puntuacio": nuevo_registro[3],
-#             "temps_joc": nuevo_registro[4],
-#             "data_hora": nuevo_registro[5].isoformat(),
-#             "estat_partida": nuevo_registro[6]
-#         }
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
-#     finally:
-#         if conn:
-#             cur.close()
-#             conn.close()
+def insertar_jugador(jugador):
+    conn = connection_db()
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO jugador (nombre, apellido) VALUES (%s, %s) RETURNING id_jugador,nombre,apellido",
+        (jugador.nombre, jugador.apellido)
+    )
+    datos_jugador = cursor.fetchone()
+    conn.commit()
+    conn.close()
+    
+    return sch.jugador_schema(datos_jugador)
+
+
+    
+        
+def registrar_intentos(db):
+    query = "INSERT INTO registro_juego (id_jugador, id_palabra, puntuacio, temps_joc) VALUES (1, 1, 0, 0) RETURNING id_registro"
+    cursor = db.cursor()
+    cursor.execute(query)
+    db.commit()
+    return {"id_registro": cursor.fetchone()[0]}
+
+
+## a continuacion he hecho la funcion de insertar 
+
+def crear_categoria(db, nombre: str):
+    query = "INSERT INTO categorias (nombre) VALUES (%s) RETURNING id_categorias, nombre"
+    cursor = db.cursor()
+    cursor.execute(query, (nombre,))
+    db.commit()
+    return {"id_categorias": cursor.fetchone()[0], "nombre": nombre}
+
+
+
+def registrar_intento(db, jugador_id: int, palabra_id: int, puntos: int, tiempo_jugado: int, ganado: bool = False):
+    estado_partida = "ganada" if ganado else "en progreso"
+    
+    query = """
+        INSERT INTO registro_juego (id_jugador, id_palabra, puntuacio, temps_joc, estat_partida) 
+        VALUES (%s, %s, %s, %s, %s) 
+        RETURNING id_registro
+    """
+  
+    cursor = db.cursor()
+    cursor.execute(query, (jugador_id, palabra_id, puntos, tiempo_jugado, estado_partida))
+    db.commit()
+    return {"id_registro": cursor.fetchone()[0]}
