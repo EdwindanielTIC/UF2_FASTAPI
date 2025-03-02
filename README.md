@@ -58,13 +58,27 @@ tambien he creado un post de insertar jugador :
 
 y me se agrega ortogandole un id automatico: 
 
-Luego quiero obtener la informacion de ese jugadro insertado :
-
-
-
 ![image](https://github.com/user-attachments/assets/24563a7e-e6eb-4cb7-bb8a-6574207476ac)
 
+Luego quiero obtener la informacion de ese jugadro insertado :
+![image](https://github.com/user-attachments/assets/37b48038-1b4f-4bc3-8546-2f79a68ed5d6)
+
+![image](https://github.com/user-attachments/assets/731231f2-4023-495d-b38c-a30fff6a8051)
 
 
+Luego he creado un post para insertar categoria : 
+![image](https://github.com/user-attachments/assets/f1a2f286-d8b9-4f3f-a418-7b3abb034e31)
+
+![image](https://github.com/user-attachments/assets/adc9bd5e-e499-4826-97f7-b14d89783bf2)
+
+Se me agrega a la bbdd correctamente : 
+![image](https://github.com/user-attachments/assets/1b4da04b-71a7-400b-a0f1-3e267f2b8144)
+
+ Luego si quiero obtener esa categoria hago lo un get : 
+ 
+![image](https://github.com/user-attachments/assets/9c867cdd-f7e7-4af1-afe3-717c81b599e2)
 
  
+Por ultimo, si queremos ver todas las categorias creo un get: 
+
+![image](https://github.com/user-attachments/assets/15b1fdfb-10d5-41f9-af8d-4839585883f2)
