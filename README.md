@@ -58,6 +58,10 @@ tambien he creado un post de insertar jugador :
 
 y me se agrega ortogandole un id automatico: 
 
+Luego quiero obtener la informacion de ese jugadro insertado :
+
+
+
 ![image](https://github.com/user-attachments/assets/24563a7e-e6eb-4cb7-bb8a-6574207476ac)
 
 
