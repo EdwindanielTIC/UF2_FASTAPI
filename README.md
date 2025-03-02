@@ -89,35 +89,75 @@ Por ultimo, si queremos ver todas las categorias creo un get:
 UPDATE: 
 
 Voy a querer cambiar el jugador con id 11, que es enric, en mi bbdd aparece lo siguiente : 
+
 ![image](https://github.com/user-attachments/assets/c693482f-db94-48a5-947b-caa82ef620ac)
 
 Actualizandolo : 
+
 ![image](https://github.com/user-attachments/assets/6047b1c6-8576-469e-b607-9e884d42d37d)
 ![image](https://github.com/user-attachments/assets/b00663fc-b723-4b26-a358-a07d9fb36774)
 Comprobadno en mi bbd: 
+
 ![image](https://github.com/user-attachments/assets/fd426ca1-f23b-4097-aabb-fdca083f9f23)
 
 Categoria :  sofa con id 43 la voy a cambiar a inmobiliario : 
+
 ![image](https://github.com/user-attachments/assets/37cb23cc-debd-45bd-bb3e-521f3eb1fd51)
 ![image](https://github.com/user-attachments/assets/afb97929-c14d-451e-abdd-33cbc0e3482c)
 ![image](https://github.com/user-attachments/assets/b5166765-6ef3-49a3-a8cf-20f104852e14)
+
 en mi bbdd : 
+
 ![image](https://github.com/user-attachments/assets/fa222b25-01bb-4a8d-9e92-ff126175ca92)
 
 
 Palabra turron con id 5 : 
+
 ![image](https://github.com/user-attachments/assets/54bb4865-3a84-4daa-893b-2a23cb9953ae)
 ![image](https://github.com/user-attachments/assets/3fe1c3a6-4f61-4a7b-a832-a04828e9bd8f)
 ![image](https://github.com/user-attachments/assets/a18f9d05-b9f2-4411-8f97-6558484cba69)
 
 EN MI BBDD: 
+
 ![image](https://github.com/user-attachments/assets/5897436d-ab84-46cf-9ba6-448b3c135404)
 
-Pasamos a los DELETE: 
+DELETE: 
+
+Pasamos a elimnar a un jugadro voy a eliminar a roberto Trujillo: 
+
+![image](https://github.com/user-attachments/assets/e21f5199-b27b-4d0e-8b2f-0b2cbb027db4)
+
+lo hacemos en fastapy : 
+
+![image](https://github.com/user-attachments/assets/0e23936f-9654-4406-9b29-73d416e91af6)
+![image](https://github.com/user-attachments/assets/6b7ef877-278b-4c72-a939-05a5591e9413)
 
 
+Ahora nos vamos a nuestra bbdd para comprobra que se ha elimando : 
 
+![image](https://github.com/user-attachments/assets/04d7dda6-5aa7-4820-aba2-9adf16e60ba3)
 
+como podemos ver, se ha elimado.
+
+ELIMINAR CATEGORIA : 
+Voy a elimnar categoria 46 inserts
+
+![image](https://github.com/user-attachments/assets/dc879226-f639-41f0-a609-89f72ed9bc3c)
+
+lo hacemos en fatapy: 
+![image](https://github.com/user-attachments/assets/11f4b4de-f80b-4689-8b55-d97d51540247)
+
+como podemos ver a continuacion no aparecer : 
+![image](https://github.com/user-attachments/assets/33100743-453b-4ef7-937d-8faaf490dee2)
+
+Pasamos a elimnar palabras : 
+como podemos observar hay muchos elefantes, eliminare el que tiene el id 11:
+![image](https://github.com/user-attachments/assets/06434e61-b961-48c8-934d-6754e2523bd8)
+
+Como podemos observar se ha elimnado correctamente: 
+
+![image](https://github.com/user-attachments/assets/952818ab-02c2-4029-a848-5386d3cfc3da)
+![image](https://github.com/user-attachments/assets/107efaab-e638-41f1-9384-fb3b3c81e860)
 
 
 
