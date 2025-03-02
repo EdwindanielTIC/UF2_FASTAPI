@@ -25,6 +25,25 @@ Lo ponemos en español:
  lo que me devuelve es lo siguiente : 
 ![image](https://github.com/user-attachments/assets/7d5b4b9b-5b1a-4f63-880a-e84781422878)
 
- 4. 
+ 4. El siguiente punto es el registrar intentos, es el que mas me ha costado : adjunto capura
+primero de todo le paso unos valores para que me los busque en la base de datos :
+
+ ![image](https://github.com/user-attachments/assets/b8fb9cbc-f3bd-4024-83bd-52b62207686c)
+
+ el jugador con ese id es : 
+![image](https://github.com/user-attachments/assets/43893b25-b5a2-491b-b3e1-b69ee4a13449)
+
+palabra : 
+![image](https://github.com/user-attachments/assets/52eeae75-ada1-4789-a8f1-55e068ca0e9a)
+
+y al hacer esto me devolvera el siguinete registro que es lo que me aparecera en la bbdd: 
+
+![image](https://github.com/user-attachments/assets/1fc29955-f805-402b-b463-fe11e60da55d)
+
+lo que se guarda en la bbdd: 
+![image](https://github.com/user-attachments/assets/3e35556c-0442-4ef3-997d-ba790999cb53)
+
+
+    
 
  
