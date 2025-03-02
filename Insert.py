@@ -16,8 +16,6 @@ def insertar_jugador(jugador):
     
     return sch.jugador_schema(datos_jugador)
 
-
-    
         
 def registrar_intentos(db):
     query = "INSERT INTO registro_juego (id_jugador, id_palabra, puntuacio, temps_joc) VALUES (1, 1, 0, 0) RETURNING id_registro"

@@ -49,9 +49,7 @@ def comenzar_joc():
 def rederitzar_elText():
     return {"text": "C o m e n ç a r   p a r t i d a"}
 
-@app.post("/registrar_intents/")
-def registro_intentos(db = Depends(get_db)):
-    return ins.registrar_intentos(db)
+
 
 
 @app.get("/abecedario/", response_model=list[str])
